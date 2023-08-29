@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PitchObjects
+    uniqueID: 2294771917
+    locked: 0
+  - name: Players
+    uniqueID: 2960785125
+    locked: 0
