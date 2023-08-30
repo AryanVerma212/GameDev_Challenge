@@ -1,7 +1,7 @@
 using UnityEngine;
 public class RightPlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 4f;
 
     public float minX;
     public float maxX;
@@ -12,7 +12,6 @@ public class RightPlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
     private void Update()
     {
         // Read input for movement

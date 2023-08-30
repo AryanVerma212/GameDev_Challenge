@@ -1,7 +1,7 @@
 using UnityEngine;
 public class LeftPlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float moveSpeed = 4f;
 
     public float minX;
     public float maxX;
