@@ -50,11 +50,11 @@ public class BallMovement : MonoBehaviour
     {
         if(collision.gameObject.tag=="LeftPlayer")
         {
-            isCapturedByLeftPlayer = true;
+           isCapturedByLeftPlayer = true;
         }
         if(collision.gameObject.tag=="RightPlayer")
         {
-            isCapturedByRightPlayer = true;
+          isCapturedByRightPlayer = true;
         }
     }
 }

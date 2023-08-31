@@ -12,7 +12,6 @@ public class LeftPlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
     private void Update()
     {
         // Read input for movement
