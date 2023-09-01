@@ -8,6 +8,7 @@ public class AIBot1 : MonoBehaviour
     public float playerSpeed = 5.0f; // Adjust this value as needed
     private Vector2 targetPosition;
     private Rigidbody2D rb;
+    public float delay;
 
     private void Start()
     {
@@ -52,6 +53,7 @@ public class AIBot1 : MonoBehaviour
 
     private Vector2 PredictPuckPosition()
     {
+        Invoke("DelayFunction", delay);
         Vector2 puckDirection = (Vector2)puck.position - rb.position;
         float timeToReachPuck = 0.5f*puckDirection.magnitude / playerSpeed;
         Vector2 predictedPuckPosition = (Vector2)puck.position + puck.GetComponent<Rigidbody2D>().velocity * timeToReachPuck;
@@ -81,5 +83,9 @@ public class AIBot1 : MonoBehaviour
         }
         // Default behavior: try to intercept the puck
         return predictedPuckPosition;
+    }
+    private void DelayFunction()
+    {
+        Debug.Log("Delay");
     }
 }
