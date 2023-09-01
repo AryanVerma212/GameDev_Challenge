@@ -5,9 +5,10 @@ public class AIBot1 : MonoBehaviour
     public Transform puck;
     public Transform otherAIBot;
     public Vector2 goalPosition;
-    public float playerSpeed = 5.0f; // Adjust this value as needed
+    public float playerSpeed = 5.0f;
     private Vector2 targetPosition;
     private Rigidbody2D rb;
+    public float delay;
 
     private void Start()
     {
@@ -16,10 +17,17 @@ public class AIBot1 : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        Vector2 moveDirection = (targetPosition - rb.position).normalized;
+        Vector2 moveVelocity = moveDirection * playerSpeed;
+        rb.velocity = moveVelocity;
+    }
+
+    public Vector3 CalculateTarget()
+    {
         // Calculate the AI's target position based on the predicted puck trajectory
         if ((puck.position - transform.position).magnitude > (puck.position - otherAIBot.position).magnitude)
         {
-            targetPosition = goalPosition+(new Vector2(puck.position.x,puck.position.y)-goalPosition).normalized*2f;
+            targetPosition = goalPosition + (new Vector2(puck.position.x, puck.position.y) - goalPosition).normalized * 2f;
             //targetPosition=new Vector2(Mathf.Clamp(targetPosition.x,8f,9f),Mathf.Clamp(targetPosition.x,-2f,2f));
         }
         else
@@ -42,18 +50,15 @@ public class AIBot1 : MonoBehaviour
             }
             Mathf.Clamp(targetPosition.x, 0, 6f);
             // Move towards the target position
-        }
-            Vector2 moveDirection = (targetPosition - rb.position).normalized;
-            Vector2 moveVelocity = moveDirection * playerSpeed;
-            rb.velocity = moveVelocity;
-        
-    }
 
+        }
+        return targetPosition;
+    }
 
     private Vector2 PredictPuckPosition()
     {
         Vector2 puckDirection = (Vector2)puck.position - rb.position;
-        float timeToReachPuck = 0.5f*puckDirection.magnitude / playerSpeed;
+        float timeToReachPuck = 0.5f * puckDirection.magnitude / playerSpeed;
         Vector2 predictedPuckPosition = (Vector2)puck.position + puck.GetComponent<Rigidbody2D>().velocity * timeToReachPuck;
 
         // If the puck's velocity is negative and its x coordinate is less than 0, move to the fixed position

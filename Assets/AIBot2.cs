@@ -8,6 +8,7 @@ public class AIBot2 : MonoBehaviour
     public float playerSpeed = 5.0f; // Adjust this value as needed
     private Vector2 targetPosition;
     private Rigidbody2D rb;
+    public int delay;
 
     private void Start()
     {
@@ -15,6 +16,15 @@ public class AIBot2 : MonoBehaviour
         transform.position = new Vector3(Random.Range(1.95f, 2.05f), Random.Range(-1.95f, -2.05f), 0f);
     }
     private void FixedUpdate()
+    {
+        Invoke("CalculateTarget", delay);
+        Vector2 moveDirection = (targetPosition - rb.position).normalized;
+        Vector2 moveVelocity = moveDirection * playerSpeed;
+        rb.velocity = moveVelocity;
+
+    }
+
+    public Vector3 CalculateTarget()
     {
         // Calculate the AI's target position based on the predicted puck trajectory
         if ((puck.position - transform.position).magnitude > (puck.position - otherAIBot.position).magnitude)
@@ -42,13 +52,10 @@ public class AIBot2 : MonoBehaviour
             }
             Mathf.Clamp(targetPosition.x, 0, 6f);
             // Move towards the target position
+            
         }
-        Vector2 moveDirection = (targetPosition - rb.position).normalized;
-        Vector2 moveVelocity = moveDirection * playerSpeed;
-        rb.velocity = moveVelocity;
-
+        return targetPosition;
     }
-
 
     private Vector2 PredictPuckPosition()
     {
