@@ -3,22 +3,31 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public Transform ball;
-    // Start is called before the first frame update
-    
 
-    // Update is called once per frame
     void Update()
     {
-        if(ball.position.x>9f || ball.position.x<-9f)
+        Debug.Log(ball.position.x);
+        if (ball.position.x > 15f || ball.position.x < -15f)
         {
-            ball.gameObject.SetActive(false);
+            ball.GetComponent<SpriteRenderer>().enabled = false;
+            Reset();
+            Debug.Log("Ball is inactive");
         }
         else
         {
-            if(!ball.gameObject.activeSelf)
+            if (!ball.GetComponent<SpriteRenderer>().enabled)
             {
-                ball.gameObject.SetActive(true);
+                ball.GetComponent<SpriteRenderer>().enabled = true;
+                Debug.Log("Ball is active");
             }
         }
+    }
+
+    private void Reset()
+    {
+        ball.position = new Vector3(0, 0, 0);
+        ball.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(-2f, 2f), Random.Range(-0.3f, 0.3f),0);
+        Debug.Log(ball.GetComponent<Rigidbody2D>().velocity);
+        Debug.Log("Ball is reset");
     }
 }

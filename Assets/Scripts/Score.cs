@@ -17,12 +17,12 @@ public class Score : MonoBehaviour
     }
     void Update()
     {
-        if(ball.position.x < -15)
+        if(ball.position.x < -10)
         {
             rightScore++;
             scoreChanged = true;
         }
-        else if(ball.position.x > 15)
+        else if(ball.position.x > 10)
         {
 
             leftScore++;
@@ -50,6 +50,6 @@ public class Score : MonoBehaviour
     private void Reset()
     {
         ball.position = new Vector3(0, 0, 0);
-        ball.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+        ball.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(0.1f, 0.2f), Random.Range(0.3f, 0.4f), 0);
     }
 }
