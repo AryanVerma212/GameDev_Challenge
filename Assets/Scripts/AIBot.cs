@@ -58,7 +58,7 @@ public class AIController : MonoBehaviour
 
         if (playerDirection.magnitude < puckDirection.magnitude)
         {
-            float timeToReachPlayer = playerDirection.magnitude / maxSpeed;
+            float timeToReachPlayer = 0.5f*playerDirection.magnitude / maxSpeed;
             Vector2 playerFuturePosition = (Vector2)player.position + player.GetComponent<Rigidbody2D>().velocity * timeToReachPlayer;
             float distanceToGoal = Vector2.Distance(predictedPuckPosition, goalPosition);
 
