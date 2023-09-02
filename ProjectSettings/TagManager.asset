@@ -7,6 +7,7 @@ TagManager:
   - LeftPlayer
   - RightPlayer
   - Collision tag
+  - CollisionTag
   layers:
   - Default
   - TransparentFX
@@ -52,4 +53,10 @@ TagManager:
     locked: 0
   - name: Goal
     uniqueID: 3128091471
+    locked: 0
+  - name: startbutton
+    uniqueID: 2844696543
+    locked: 0
+  - name: exitbutton
+    uniqueID: 2708013651
     locked: 0

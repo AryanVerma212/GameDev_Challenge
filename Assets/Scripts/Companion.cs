@@ -8,6 +8,7 @@ public class Companion : MonoBehaviour
     public float playerSpeed = 5.0f; // Adjust this value as needed
     private Vector2 targetPosition;
     private Rigidbody2D rb;
+    public GameObject difficultyObject;
 
     private void Start()
     {

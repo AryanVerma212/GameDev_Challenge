@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIBot1 : MonoBehaviour
+public class AIBot2 : MonoBehaviour
 {
     public Transform puck;
     public Transform otherAIBot;
@@ -12,11 +12,12 @@ public class AIBot1 : MonoBehaviour
     private Vector2 offset;
     public GameObject difficultyObject;
 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform.position = new Vector3(Random.Range(1.95f, 2.05f), Random.Range(1.95f, 2.05f), 0f);
-        int difficultyLevel = difficultyObject.GetComponent<Difficulty>().difficultyLevel;
+        transform.position = new Vector3(Random.Range(1.95f, 2.05f), Random.Range(-1.95f, -2.05f), 0f);
+        int difficultyLevel=difficultyObject.GetComponent<Difficulty>().difficultyLevel;
         if (difficultyLevel == 0)
         {
             offsetRadius = 0.15f;
@@ -39,7 +40,7 @@ public class AIBot1 : MonoBehaviour
         // Calculate the AI's target position based on the predicted puck trajectory
         if ((puck.position - transform.position).magnitude > (puck.position - otherAIBot.position).magnitude)
         {
-            targetPosition = goalPosition+(new Vector2(puck.position.x,puck.position.y)-goalPosition).normalized*3f;
+            targetPosition = goalPosition + (new Vector2(puck.position.x, puck.position.y) - goalPosition).normalized * 3f;
             //targetPosition=new Vector2(Mathf.Clamp(targetPosition.x,8f,9f),Mathf.Clamp(targetPosition.x,-2f,2f));
         }
         else
@@ -68,14 +69,14 @@ public class AIBot1 : MonoBehaviour
         Vector2 moveDirection = (targetPosition - rb.position).normalized;
         Vector2 moveVelocity = moveDirection * playerSpeed;
         rb.velocity = moveVelocity;
-        
+
     }
 
 
     private Vector2 PredictPuckPosition()
     {
         Vector2 puckDirection = (Vector2)puck.position - rb.position;
-        float timeToReachPuck = 0.5f*puckDirection.magnitude / playerSpeed;
+        float timeToReachPuck = 0.5f * puckDirection.magnitude / playerSpeed;
         Vector2 predictedPuckPosition = (Vector2)puck.position + puck.GetComponent<Rigidbody2D>().velocity * timeToReachPuck;
 
         // If the puck's velocity is negative and its x coordinate is less than 0, move to the fixed position
@@ -106,10 +107,10 @@ public class AIBot1 : MonoBehaviour
     }
     private void OffsetSetter()
     {
-        float timing = Time.realtimeSinceStartup % 10;
-        if ((timing > 4 && timing <4.1) || (timing > 8 && timing < 8.1))
+        float timing = Time.realtimeSinceStartup % 10 ;
+        if ((timing>0&&timing<0.1)||(timing>4&&timing<4.1 )||(timing > 8 && timing < 8.1))
         {
-            offset = new Vector2(Random.Range(-offsetRadius, offsetRadius), Random.Range(-offsetRadius, offsetRadius));
+            offset=new Vector2(Random.Range(-offsetRadius, offsetRadius), Random.Range(-offsetRadius, offsetRadius));
         }
     }
 }

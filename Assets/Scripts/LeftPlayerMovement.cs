@@ -1,16 +1,30 @@
 using UnityEngine;
 public class LeftPlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 4f;
+    private float moveSpeed = 8f;
 
     public float minX;
     public float maxX;
+    public GameObject difficultyObject;
 
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        int difficultyLevel = difficultyObject.GetComponent<Difficulty>().difficultyLevel;
+        if (difficultyLevel == 0)
+        {
+            moveSpeed = 15f;
+        }
+        else if (difficultyLevel == 1)
+        {
+            moveSpeed = 12f;
+        }
+        else if (difficultyLevel == 2)
+        {
+            moveSpeed = 8f;
+        }
     }
     private void Update()
     {
