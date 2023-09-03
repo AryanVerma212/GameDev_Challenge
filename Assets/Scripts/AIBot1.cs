@@ -5,22 +5,41 @@ public class AIBot1 : MonoBehaviour
     public Transform puck;
     public Transform otherAIBot;
     public Vector2 goalPosition;
-    public float playerSpeed = 5.0f; // Adjust this value as needed
+    private float playerSpeed = 5.0f; // Adjust this value as needed
     private Vector2 targetPosition;
     private Rigidbody2D rb;
-    public float delay;
+    public float offsetRadius;
+    private Vector2 offset;
+    public GameObject difficultyObject;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.position = new Vector3(Random.Range(1.95f, 2.05f), Random.Range(1.95f, 2.05f), 0f);
+        int difficultyLevel = difficultyObject.GetComponent<Difficulty>().difficultyLevel;
+        if (difficultyLevel == 0)
+        {
+            offsetRadius = 0.15f;
+            playerSpeed = 4f;
+        }
+        else if (difficultyLevel == 1)
+        {
+            offsetRadius = 0.05f;
+            playerSpeed = 5f;
+        }
+        else if (difficultyLevel == 2)
+        {
+            offsetRadius = 0.0f;
+            playerSpeed = 5.5f;
+        }
+        Debug.Log(offsetRadius);
     }
     private void FixedUpdate()
     {
         // Calculate the AI's target position based on the predicted puck trajectory
         if ((puck.position - transform.position).magnitude > (puck.position - otherAIBot.position).magnitude)
         {
-            targetPosition = goalPosition+(new Vector2(puck.position.x,puck.position.y)-goalPosition).normalized*2f;
+            targetPosition = goalPosition+(new Vector2(puck.position.x,puck.position.y)-goalPosition).normalized*3f;
             //targetPosition=new Vector2(Mathf.Clamp(targetPosition.x,8f,9f),Mathf.Clamp(targetPosition.x,-2f,2f));
         }
         else
@@ -44,9 +63,11 @@ public class AIBot1 : MonoBehaviour
             Mathf.Clamp(targetPosition.x, 0, 6f);
             // Move towards the target position
         }
-            Vector2 moveDirection = (targetPosition - rb.position).normalized;
-            Vector2 moveVelocity = moveDirection * playerSpeed;
-            rb.velocity = moveVelocity;
+        OffsetSetter();
+        targetPosition = targetPosition + offset;
+        Vector2 moveDirection = (targetPosition - rb.position).normalized;
+        Vector2 moveVelocity = moveDirection * playerSpeed;
+        rb.velocity = moveVelocity;
         
     }
 
@@ -84,8 +105,12 @@ public class AIBot1 : MonoBehaviour
         // Default behavior: try to intercept the puck
         return predictedPuckPosition;
     }
-    private void DelayFunction()
+    private void OffsetSetter()
     {
-        Debug.Log("Delay");
+        float timing = Time.realtimeSinceStartup % 10;
+        if ((timing > 4 && timing <4.1) || (timing > 8 && timing < 8.1))
+        {
+            offset = new Vector2(Random.Range(-offsetRadius, offsetRadius), Random.Range(-offsetRadius, offsetRadius));
+        }
     }
 }

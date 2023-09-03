@@ -8,11 +8,25 @@ public class Companion : MonoBehaviour
     public float playerSpeed = 5.0f; // Adjust this value as needed
     private Vector2 targetPosition;
     private Rigidbody2D rb;
+    public GameObject difficultyObject;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         transform.position = new Vector3(-7.5f,0 , 0);
+        int difficultyLevel = difficultyObject.GetComponent<Difficulty>().difficultyLevel;
+        if (difficultyLevel == 0)
+        {
+            playerSpeed = 5.5f;
+        }
+        else if (difficultyLevel == 1)
+        {
+            playerSpeed = 4f;
+        }
+        else if (difficultyLevel == 2)
+        {
+            playerSpeed = 4.5f;
+        }
     }
     private void FixedUpdate()
     {

@@ -1,19 +1,18 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour
 {
     public Transform ball;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI winText;
     private int leftScore;
     private int rightScore;
-    public GameObject panel;
     bool scoreChanged = false;
     void Start()
     {
         leftScore = 0;
         rightScore = 0;
-        scoreText.text = leftScore + " - " + rightScore;
+        scoreText.text = leftScore + "    -    " + rightScore;
     }
     void Update()
     {
@@ -30,19 +29,16 @@ public class Score : MonoBehaviour
         }
         if(scoreChanged)
         {
-            scoreText.text = leftScore + " - " + rightScore;
+            scoreText.text = leftScore + "  -  " + rightScore;
             scoreChanged = false;
             if(leftScore == 5)
             {
                 Debug.Log("LEFT PLAYER WINS!");
-                panel.SetActive(true);
-                winText.text = "Left Player Wins!";
+                SceneManager.LoadScene("Congratulatory");
             }
             else if(rightScore == 5)
             {
                 Debug.Log("RIGHT PLAYER WINS!");
-                panel.SetActive(true);
-                winText.text = "Right Player Wins!";
             }
             Reset();
         }

@@ -6,9 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Menu.unity
+    guid: 2b5d047a29981bb4e93f3033c6d305ed
+  - enabled: 1
+    path: Assets/Scenes/LevelChooser.unity
+    guid: a46df3c0009d3934faa15183c3d0744c
+  - enabled: 1
+    path: Assets/Scenes/StartCounter.unity
+    guid: 8b054525a6fb0bc4cb4cac2074ea712c
+  - enabled: 1
+    path: Assets/Scenes/MainGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Winner.unity
-    guid: bebef10d4f3d2d84e871ea91358a7e8e
+    path: Assets/Scenes/Congratulatory.unity
+    guid: 9d16f3637c1e50a43bf5f17ed2050629
+  - enabled: 1
+    path: Assets/Scenes/YouLose.unity
+    guid: 5429fe6ab6c75364484ff33638f11862
+  - enabled: 1
+    path: Assets/Scenes/TimeOver.unity
+    guid: 46d1eea1d8e16c54cad92dcdb7496849
   m_configObjects: {}
