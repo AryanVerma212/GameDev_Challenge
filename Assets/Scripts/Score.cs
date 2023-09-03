@@ -12,7 +12,7 @@ public class Score : MonoBehaviour
     {
         leftScore = 0;
         rightScore = 0;
-        scoreText.text = leftScore + " - " + rightScore;
+        scoreText.text = leftScore + "    -    " + rightScore;
     }
     void Update()
     {
@@ -29,7 +29,7 @@ public class Score : MonoBehaviour
         }
         if(scoreChanged)
         {
-            scoreText.text = leftScore + " - " + rightScore;
+            scoreText.text = leftScore + "  -  " + rightScore;
             scoreChanged = false;
             if(leftScore == 5)
             {

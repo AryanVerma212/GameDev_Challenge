@@ -15,15 +15,15 @@ public class LeftPlayerMovement : MonoBehaviour
         int difficultyLevel = difficultyObject.GetComponent<Difficulty>().difficultyLevel;
         if (difficultyLevel == 0)
         {
-            moveSpeed = 15f;
+            moveSpeed = 12f;
         }
         else if (difficultyLevel == 1)
         {
-            moveSpeed = 12f;
+            moveSpeed = 8f;
         }
         else if (difficultyLevel == 2)
         {
-            moveSpeed = 8f;
+            moveSpeed = 6f;
         }
     }
     private void Update()
