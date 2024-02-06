@@ -75,7 +75,7 @@ public class AIBot2 : MonoBehaviour
 
     private Vector2 PredictPuckPosition()
     {
-        Invoke("DelayFunction", delay);
+        //Invoke("DelayFunction", delay);
         Vector2 puckDirection = (Vector2)puck.position - rb.position;
         float timeToReachPuck = 0.5f * puckDirection.magnitude / playerSpeed;
         Vector2 predictedPuckPosition = (Vector2)puck.position + puck.GetComponent<Rigidbody2D>().velocity * timeToReachPuck;
